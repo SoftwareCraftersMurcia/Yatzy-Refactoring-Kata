@@ -6,6 +6,16 @@ namespace Yatzy;
 
 final class Yatzy
 {
+    public function __construct($d1, $d2, $d3, $d4, $_5)
+    {
+        $this->dice = array_fill(0, 6, 0);
+        $this->dice[0] = $d1;
+        $this->dice[1] = $d2;
+        $this->dice[2] = $d3;
+        $this->dice[3] = $d4;
+        $this->dice[4] = $_5;
+    }
+
     /**
      * @param list<int> $dice
      */
@@ -29,9 +39,7 @@ final class Yatzy
      */
     public static function ones(array $dice): int
     {
-        $values = array_count_values($dice);
-
-        return $values[1] ?? 0;
+        return self::sumEquals($dice, 1);
     }
 
     /**
@@ -39,11 +47,7 @@ final class Yatzy
      */
     public static function twos(array $dice): int
     {
-        $values = array_count_values($dice);
-
-        $occurrences = $values[2] ?? 0;
-
-        return $occurrences * 2;
+        return self::sumEquals($dice, 2);
     }
 
     /**
@@ -51,21 +55,19 @@ final class Yatzy
      */
     public static function threes(array $dice): int
     {
-        $values = array_count_values($dice);
-
-        $occurrences = $values[3] ?? 0;
-
-        return $occurrences * 3;
+        return self::sumEquals($dice, 3);
     }
 
-    public function __construct($d1, $d2, $d3, $d4, $_5)
+    /**
+     * @param list<int> $dice
+     */
+    private static function sumEquals(array $dice, int $number): int
     {
-        $this->dice = array_fill(0, 6, 0);
-        $this->dice[0] = $d1;
-        $this->dice[1] = $d2;
-        $this->dice[2] = $d3;
-        $this->dice[3] = $d4;
-        $this->dice[4] = $_5;
+        $values = array_count_values($dice);
+
+        $occurrences = $values[$number] ?? 0;
+
+        return $occurrences * $number;
     }
 
     public function fours()
