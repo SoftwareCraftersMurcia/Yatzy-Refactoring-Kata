@@ -1,22 +1,23 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Yatzy;
 
 class Yatzy
 {
-    public static function chance($d1, $d2, $d3, $d4, $d5)
+    /**
+     * @param list<int> $dice
+     */
+    public static function chance(array $dice): int
     {
-        $total = 0;
-        $total += $d1;
-        $total += $d2;
-        $total += $d3;
-        $total += $d4;
-        $total += $d5;
-        return $total;
+        return array_sum($dice);
     }
 
-    public static function yatzyScore($dice)
+    /**
+     * @param list<int> $dice
+     */
+    public static function yatzyScore(array $dice): int
     {
         $counts = array_fill(0, count($dice) + 1, 0);
         foreach ($dice as $die) {
