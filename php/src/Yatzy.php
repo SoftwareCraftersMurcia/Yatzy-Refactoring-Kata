@@ -24,55 +24,38 @@ final class Yatzy
         return count($values) === 1 ? 50 : 0;
     }
 
-    public static function ones($d1, $d2, $d3, $d4, $d5)
+    /**
+     * @param list<int> $dice
+     */
+    public static function ones(array $dice): int
     {
-        $sum = 0;
-        if ($d1 == 1)
-            $sum += 1;
-        if ($d2 == 1)
-            $sum += 1;
-        if ($d3 == 1)
-            $sum += 1;
-        if ($d4 == 1)
-            $sum += 1;
-        if ($d5 == 1)
-            $sum += 1;
+        $values = array_count_values($dice);
 
-        return $sum;
+        return $values[1] ?? 0;
     }
 
-    public static function twos($d1, $d2, $d3, $d4, $d5)
+    /**
+     * @param list<int> $dice
+     */
+    public static function twos(array $dice): int
     {
-        $sum = 0;
-        if ($d1 == 2)
-            $sum += 2;
-        if ($d2 == 2)
-            $sum += 2;
-        if ($d3 == 2)
-            $sum += 2;
-        if ($d4 == 2)
-            $sum += 2;
-        if ($d5 == 2)
-            $sum += 2;
+        $values = array_count_values($dice);
 
-        return $sum;
+        $occurrences = $values[2] ?? 0;
+
+        return $occurrences * 2;
     }
 
-    public static function threes($d1, $d2, $d3, $d4, $d5)
+    /**
+     * @param list<int> $dice
+     */
+    public static function threes(array $dice): int
     {
-        $s = 0;
-        if ($d1 == 3)
-            $s += 3;
-        if ($d2 == 3)
-            $s += 3;
-        if ($d3 == 3)
-            $s += 3;
-        if ($d4 == 3)
-            $s += 3;
-        if ($d5 == 3)
-            $s += 3;
+        $values = array_count_values($dice);
 
-        return $s;
+        $occurrences = $values[3] ?? 0;
+
+        return $occurrences * 3;
     }
 
     public function __construct($d1, $d2, $d3, $d4, $_5)
