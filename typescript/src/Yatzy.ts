@@ -28,12 +28,6 @@ export default class Yatzy {
     return this.sumDices([d1, d2, d3, d4, d5], 2);
   }
 
-  private static sumDices(roll: Roll, diceNumber: number) {
-    return roll
-        .filter(dice => dice === diceNumber)
-        .reduce((acum, number) => acum + number, 0);
-  }
-
   static threes(d1: number, d2: number, d3: number, d4: number, d5: number): number {
     var s;
     s = 0;
@@ -176,5 +170,11 @@ export default class Yatzy {
     let sum = 0;
     for (var at = 0; at < this.dice.length; at++) if (this.dice[at] == 6) sum = sum + 6;
     return sum;
+  }
+
+  private static sumDices(roll: Roll, diceNumber: number) {
+    return roll
+        .filter(dice => dice === diceNumber)
+        .reduce((acum, number) => acum + number, 0);
   }
 }
