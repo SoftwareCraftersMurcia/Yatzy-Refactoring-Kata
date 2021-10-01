@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Yatzy\Tests;
@@ -6,9 +7,8 @@ namespace Yatzy\Tests;
 use PHPUnit\Framework\TestCase;
 use Yatzy\Yatzy;
 
-class YatzyTest extends TestCase
+final class YatzyTest extends TestCase
 {
-
     public function test_chance_scores_sum_of_all_dice(): void
     {
         self::assertSame(15, Yatzy::chance([2, 3, 4, 5, 1]));

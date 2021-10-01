@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Yatzy;
 
-class Yatzy
+final class Yatzy
 {
     /**
      * @param list<int> $dice
@@ -19,15 +19,9 @@ class Yatzy
      */
     public static function yatzyScore(array $dice): int
     {
-        $counts = array_fill(0, count($dice) + 1, 0);
-        foreach ($dice as $die) {
-            $counts[$die - 1] += 1;
-        }
-        foreach (range(0, count($counts) - 1) as $i) {
-            if ($counts[$i] == 5)
-                return 50;
-        }
-        return 0;
+        $values = array_count_values($dice);
+
+        return count($values) === 1 ? 50 : 0;
     }
 
     public static function ones($d1, $d2, $d3, $d4, $d5)
@@ -211,7 +205,7 @@ class Yatzy
         $_2 = false;
         $i = 0;
         $_2_at = 0;
-        $_3 = False;
+        $_3 = false;
         $_3_at = 0;
 
         $tallies = array_fill(0, 6, 0);
@@ -223,14 +217,14 @@ class Yatzy
 
         foreach (range(0, 5) as $i) {
             if ($tallies[$i] == 2) {
-                $_2 = True;
+                $_2 = true;
                 $_2_at = $i + 1;
             }
         }
 
         foreach (range(0, 5) as $i) {
             if ($tallies[$i] == 3) {
-                $_3 = True;
+                $_3 = true;
                 $_3_at = $i + 1;
             }
         }
