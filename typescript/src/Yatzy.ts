@@ -32,16 +32,11 @@ export default class Yatzy {
   }
 
   fives(): number {
-    let s = 0;
-    var i;
-    for (i = 0; i < this.dice.length; i++) if (this.dice[i] == 5) s = s + 5;
-    return s;
+    return Yatzy.sumDices(this.dice, 5);
   }
 
   sixes(): number {
-    let sum = 0;
-    for (var at = 0; at < this.dice.length; at++) if (this.dice[at] == 6) sum = sum + 6;
-    return sum;
+    return Yatzy.sumDices(this.dice, 6);
   }
 
   static score_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
