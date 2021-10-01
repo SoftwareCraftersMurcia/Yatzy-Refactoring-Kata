@@ -84,18 +84,22 @@ final class Yatzy
         return $occurrences * $number;
     }
 
-    public static function scorePair($d1, $d2, $d3, $d4, $d5)
+    /**
+     * @param list<int> $dice
+     */
+    public static function scorePair(array $dice): int
     {
-        $counts = array_fill(0, 6, 0);
-        $counts[$d1 - 1] += 1;
-        $counts[$d2 - 1] += 1;
-        $counts[$d3 - 1] += 1;
-        $counts[$d4 - 1] += 1;
-        $counts[$d5 - 1] += 1;
-        for ($at = 0; $at != 6; $at++)
-            if ($counts[6 - $at - 1] == 2)
-                return (6 - $at) * 2;
-        return 0;
+        $values = array_count_values($dice);
+
+        $repeatedValues = array_filter($values, fn(int $i) => $i > 1);
+        if(empty($repeatedValues)){
+            return 0;
+        }
+
+        ksort($repeatedValues);
+        [$k, $v] = reset($repeatedValues);
+        # TODO
+        return $k * 2;
     }
 
     public static function twoPair($d1, $d2, $d3, $d4, $d5)
