@@ -6,16 +6,6 @@ namespace Yatzy;
 
 final class Yatzy
 {
-    public function __construct($d1, $d2, $d3, $d4, $_5)
-    {
-        $this->dice = array_fill(0, 6, 0);
-        $this->dice[0] = $d1;
-        $this->dice[1] = $d2;
-        $this->dice[2] = $d3;
-        $this->dice[3] = $d4;
-        $this->dice[4] = $_5;
-    }
-
     /**
      * @param list<int> $dice
      */
@@ -61,6 +51,30 @@ final class Yatzy
     /**
      * @param list<int> $dice
      */
+    public static function fours(array $dice): int
+    {
+        return self::sumEquals($dice, 4);
+    }
+
+    /**
+     * @param list<int> $dice
+     */
+    public static function fives(array $dice): int
+    {
+        return self::sumEquals($dice, 5);
+    }
+
+    /**
+     * @param list<int> $dice
+     */
+    public static function sixes(array $dice): int
+    {
+        return self::sumEquals($dice, 6);
+    }
+
+    /**
+     * @param list<int> $dice
+     */
     private static function sumEquals(array $dice, int $number): int
     {
         $values = array_count_values($dice);
@@ -68,36 +82,6 @@ final class Yatzy
         $occurrences = $values[$number] ?? 0;
 
         return $occurrences * $number;
-    }
-
-    public function fours()
-    {
-        $sum = 0;
-        for ($at = 0; $at != 5; $at++) {
-            if ($this->dice[$at] == 4) {
-                $sum += 4;
-            }
-        }
-        return $sum;
-    }
-
-    public function Fives()
-    {
-        $s = 0;
-        $i = 0;
-        for ($i = 0; $i < 5; $i++)
-            if ($this->dice[$i] == 5)
-                $s = $s + 5;
-        return $s;
-    }
-
-    public function sixes()
-    {
-        $sum = 0;
-        for ($at = 0; $at < 5; $at++)
-            if ($this->dice[$at] == 6)
-                $sum = $sum + 6;
-        return $sum;
     }
 
     public static function score_pair($d1, $d2, $d3, $d4, $d5)
