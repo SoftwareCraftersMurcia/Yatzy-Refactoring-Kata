@@ -1,14 +1,9 @@
 type Roll = [number, number, number, number, number];
 export default class Yatzy {
-  private dice: number[];
+  private dice: Roll;
 
   constructor(d1: number, d2: number, d3: number, d4: number, d5: number) {
-    this.dice = [];
-    this.dice[0] = d1;
-    this.dice[1] = d2;
-    this.dice[2] = d3;
-    this.dice[3] = d4;
-    this.dice[4] = d5;
+    this.dice = [d1, d2, d3, d4, d5];
   }
 
   static chance(d1: number, d2: number, d3: number, d4: number, d5: number): number {
@@ -33,14 +28,7 @@ export default class Yatzy {
   }
 
   fours(): number {
-    var sum;
-    sum = 0;
-    for (let at = 0; at != 5; at++) {
-      if (this.dice[at] == 4) {
-        sum += 4;
-      }
-    }
-    return sum;
+    return Yatzy.sumDices(this.dice, 4);
   }
 
   fives(): number {
