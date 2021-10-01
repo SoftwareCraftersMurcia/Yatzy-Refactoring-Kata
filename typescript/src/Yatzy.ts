@@ -29,14 +29,31 @@ export default class Yatzy {
   }
 
   static threes(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    var s;
-    s = 0;
-    if (d1 == 3) s += 3;
-    if (d2 == 3) s += 3;
-    if (d3 == 3) s += 3;
-    if (d4 == 3) s += 3;
-    if (d5 == 3) s += 3;
+    return this.sumDices([d1, d2, d3, d4, d5], 3);
+  }
+
+  fours(): number {
+    var sum;
+    sum = 0;
+    for (let at = 0; at != 5; at++) {
+      if (this.dice[at] == 4) {
+        sum += 4;
+      }
+    }
+    return sum;
+  }
+
+  fives(): number {
+    let s = 0;
+    var i;
+    for (i = 0; i < this.dice.length; i++) if (this.dice[i] == 5) s = s + 5;
     return s;
+  }
+
+  sixes(): number {
+    let sum = 0;
+    for (var at = 0; at < this.dice.length; at++) if (this.dice[at] == 6) sum = sum + 6;
+    return sum;
   }
 
   static score_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
@@ -146,30 +163,6 @@ export default class Yatzy {
 
     if (_2 && _3) return _2_at * 2 + _3_at * 3;
     else return 0;
-  }
-
-  fours(): number {
-    var sum;
-    sum = 0;
-    for (let at = 0; at != 5; at++) {
-      if (this.dice[at] == 4) {
-        sum += 4;
-      }
-    }
-    return sum;
-  }
-
-  fives(): number {
-    let s = 0;
-    var i;
-    for (i = 0; i < this.dice.length; i++) if (this.dice[i] == 5) s = s + 5;
-    return s;
-  }
-
-  sixes(): number {
-    let sum = 0;
-    for (var at = 0; at < this.dice.length; at++) if (this.dice[at] == 6) sum = sum + 6;
-    return sum;
   }
 
   private static sumDices(roll: Roll, diceNumber: number) {
