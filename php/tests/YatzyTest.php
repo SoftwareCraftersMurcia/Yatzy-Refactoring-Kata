@@ -22,7 +22,7 @@ final class YatzyTest extends TestCase
         self::assertSame(0, Yatzy::yatzyScore([6, 6, 6, 6, 3]));
     }
 
-    public function test_1s(): void
+    public function test_ones(): void
     {
         self::assertSame(1, Yatzy::ones([1, 2, 3, 4, 5]));
         self::assertSame(2, Yatzy::ones([1, 2, 1, 4, 5]));
@@ -30,7 +30,7 @@ final class YatzyTest extends TestCase
         self::assertSame(4, Yatzy::ones([1, 2, 1, 1, 1]));
     }
 
-    public function test_2s(): void
+    public function test_twos(): void
     {
         self::assertSame(4, Yatzy::twos([1, 2, 3, 2, 6]));
         self::assertSame(10, Yatzy::twos([2, 2, 2, 2, 2]));
@@ -65,40 +65,40 @@ final class YatzyTest extends TestCase
 
     public function test_one_pair(): void
     {
-        self::assertSame(6, Yatzy::score_pair(3, 4, 3, 5, 6));
-        self::assertSame(10, Yatzy::score_pair(5, 3, 3, 3, 5));
-        self::assertSame(12, Yatzy::score_pair(5, 3, 6, 6, 5));
+        self::assertSame(6, Yatzy::scorePair(3, 4, 3, 5, 6));
+        self::assertSame(10, Yatzy::scorePair(5, 3, 3, 3, 5));
+        self::assertSame(12, Yatzy::scorePair(5, 3, 6, 6, 5));
     }
 
-    public function test_two_Pair(): void
+    public function test_two_pair(): void
     {
-        self::assertSame(16, Yatzy::two_pair(3, 3, 5, 4, 5));
-        self::assertSame(18, Yatzy::two_pair(3, 3, 6, 6, 6));
-        self::assertSame(0, Yatzy::two_pair(3, 3, 6, 5, 4));
+        self::assertSame(16, Yatzy::twoPair(3, 3, 5, 4, 5));
+        self::assertSame(18, Yatzy::twoPair(3, 3, 6, 6, 6));
+        self::assertSame(0, Yatzy::twoPair(3, 3, 6, 5, 4));
     }
 
     public function test_three_of_a_kind(): void
     {
-        self::assertSame(9, Yatzy::three_of_a_kind(3, 3, 3, 4, 5));
-        self::assertSame(15, Yatzy::three_of_a_kind(5, 3, 5, 4, 5));
-        self::assertSame(9, Yatzy::three_of_a_kind(3, 3, 3, 2, 1));
+        self::assertSame(9, Yatzy::threeOfAKind(3, 3, 3, 4, 5));
+        self::assertSame(15, Yatzy::threeOfAKind(5, 3, 5, 4, 5));
+        self::assertSame(9, Yatzy::threeOfAKind(3, 3, 3, 2, 1));
     }
 
-    public function test_smallStraight(): void
+    public function test_small_straight(): void
     {
         self::assertSame(15, Yatzy::smallStraight(1, 2, 3, 4, 5));
         self::assertSame(15, Yatzy::smallStraight(2, 3, 4, 5, 1));
         self::assertSame(0, Yatzy::smallStraight(1, 2, 2, 4, 5));
     }
 
-    public function test_largeStraight(): void
+    public function test_large_straight(): void
     {
         self::assertSame(20, Yatzy::largeStraight(6, 2, 3, 4, 5));
         self::assertSame(20, Yatzy::largeStraight(2, 3, 4, 5, 6));
         self::assertSame(0, Yatzy::largeStraight(1, 2, 2, 4, 5));
     }
 
-    public function test_fullHouse(): void
+    public function test_full_house(): void
     {
         self::assertSame(18, Yatzy::fullHouse(6, 2, 2, 2, 6));
         self::assertSame(0, Yatzy::fullHouse(2, 3, 4, 5, 6));

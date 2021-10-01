@@ -84,7 +84,7 @@ final class Yatzy
         return $occurrences * $number;
     }
 
-    public static function score_pair($d1, $d2, $d3, $d4, $d5)
+    public static function scorePair($d1, $d2, $d3, $d4, $d5)
     {
         $counts = array_fill(0, 6, 0);
         $counts[$d1 - 1] += 1;
@@ -98,7 +98,7 @@ final class Yatzy
         return 0;
     }
 
-    public static function two_pair($d1, $d2, $d3, $d4, $d5)
+    public static function twoPair($d1, $d2, $d3, $d4, $d5)
     {
         $counts = array_fill(0, 6, 0);
         $counts[$d1 - 1] += 1;
@@ -120,7 +120,7 @@ final class Yatzy
             return 0;
     }
 
-    public static function three_of_a_kind($d1, $d2, $d3, $d4, $d5)
+    public static function threeOfAKind($d1, $d2, $d3, $d4, $d5)
     {
         $t = array_fill(0, 6, 0);
         $t[$d1 - 1] += 1;
