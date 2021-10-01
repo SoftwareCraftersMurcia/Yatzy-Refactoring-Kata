@@ -1,3 +1,4 @@
+type Roll = [number, number, number, number, number];
 export default class Yatzy {
   private dice: number[];
 
@@ -20,14 +21,16 @@ export default class Yatzy {
   }
 
   static ones(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    return [d1, d2, d3, d4, d5]
-        .filter(number => number === 1)
-        .reduce((acum, number) => acum + number, 0);
+    return this.sumDices([d1, d2, d3, d4, d5], 1);
   }
 
   static twos(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    return [d1, d2, d3, d4, d5]
-        .filter(number => number === 2)
+    return this.sumDices([d1, d2, d3, d4, d5], 2);
+  }
+
+  private static sumDices(roll: Roll, diceNumber: number) {
+    return roll
+        .filter(dice => dice === diceNumber)
         .reduce((acum, number) => acum + number, 0);
   }
 
