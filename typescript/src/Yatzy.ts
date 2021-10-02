@@ -40,11 +40,8 @@ export default class Yatzy {
   }
 
   static score_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    let number = [6, 5, 4, 3, 2, 1]
-      .map(number => [d1, d2, d3, d4, d5].filter(roll => number === roll).length)
-      .findIndex(x => x >= 2);
-    let hasPair = number !== -1;
-    return hasPair ? (6 - number) * 2 : 0;
+    let dice = this.findGreaterDiceWithDicesEqual(d1, d2, d3, d4, d5, 2);
+    return dice * 2;
   }
 
   static two_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
@@ -139,5 +136,13 @@ export default class Yatzy {
     return roll
         .filter(dice => dice === diceNumber)
         .reduce((acum, number) => acum + number, 0);
+  }
+
+  private static findGreaterDiceWithDicesEqual(d1: number, d2: number, d3: number, d4: number, d5: number, numberOfSameDice: number) {
+    let number = [6, 5, 4, 3, 2, 1]
+      .map(number => [d1, d2, d3, d4, d5].filter(roll => number === roll).length)
+      .findIndex(x => x >= numberOfSameDice);
+    let hasPair = number !== -1;
+    return hasPair ? (6 - number) : 0;
   }
 }
