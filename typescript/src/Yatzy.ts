@@ -1,31 +1,30 @@
 type Roll = [number, number, number, number, number];
-class TheRoll {
-  private roll: Roll;
+class Dices {
+  private dices: number[];
 
-  constructor(...roll: number[]) {
-    this.roll = roll as Roll;
+  constructor(...dices: number[]) {
+    this.dices = dices;
   }
 
   sum() {
-    return this.roll.reduce((acum, number) => acum + number, 0);
+    return this.dices.reduce((acum, number) => acum + number, 0);
   }
 
-  dices(diceNumber: number) {
-    let roll = this.roll
-      .filter(dice => dice === diceNumber)
+  with(number: number) {
+    let dices = this.dices
+      .filter(dice => dice === number)
       .reduce((acum, number) => acum + number, 0);
-    return new TheRoll(roll);
-
+    return new Dices(dices);
   }
 }
 
 export default class Yatzy {
   static chance(roll: Roll): number {
-    return new TheRoll(...roll).sum();
+    return new Dices(...roll).sum();
   }
 
   static yatzy(roll: Roll): number {
-    let sum = new TheRoll(...roll).sum();
+    let sum = new Dices(...roll).sum();
     return sum === roll[0] * 5 ? 50 : 0;
   }
 
@@ -88,7 +87,7 @@ export default class Yatzy {
   }
 
   private static sumDices(roll: Roll, diceNumber: number) {
-    return new TheRoll(...roll).dices(diceNumber).sum();
+    return new Dices(...roll).with(diceNumber).sum();
   }
 
   private static findGreaterDiceWithDicesEqual(roll: Roll, numberOfSameDice: number, diceExcluded: number|undefined = undefined) {
