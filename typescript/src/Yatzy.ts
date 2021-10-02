@@ -59,7 +59,7 @@ export default class Yatzy {
   }
 
   static smallStraight(...roll: number[]): number {
-    return JSON.stringify(roll.sort()) === JSON.stringify([1,2,3,4,5]) ? 15 : 0;
+    return this.sameRolls(roll as Roll, [1, 2, 3, 4, 5] as Roll) ? 15 : 0;
   }
 
   static largeStraight(d1: number, d2: number, d3: number, d4: number, d5: number): number {
@@ -117,5 +117,9 @@ export default class Yatzy {
       .findIndex((x, index) => x >= numberOfSameDice && index > 6 - (diceExcluded || 999));
     let hasPair = number !== -1;
     return hasPair ? (6 - number) : 0;
+  }
+
+  private static sameRolls(roll: Roll, other: Roll) {
+    return JSON.stringify(roll.sort()) === JSON.stringify(other);
   }
 }
