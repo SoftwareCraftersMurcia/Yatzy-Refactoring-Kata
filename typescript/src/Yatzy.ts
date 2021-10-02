@@ -15,16 +15,16 @@ export default class Yatzy {
     return sum === args[0] * 5 ? 50 : 0;
   }
 
-  static ones(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    return this.sumDices([d1, d2, d3, d4, d5], 1);
+  static ones(...roll: number[]): number {
+    return this.sumDices(roll as Roll, 1);
   }
 
-  static twos(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    return this.sumDices([d1, d2, d3, d4, d5], 2);
+  static twos(...roll: number[]): number {
+    return this.sumDices(roll as Roll, 2);
   }
 
-  static threes(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    return this.sumDices([d1, d2, d3, d4, d5], 3);
+  static threes(...roll: number[]): number {
+    return this.sumDices(roll as Roll, 3);
   }
 
   fours(): number {
@@ -39,23 +39,21 @@ export default class Yatzy {
     return Yatzy.sumDices(this.roll, 6);
   }
 
-  static score_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    let roll = [d1, d2, d3, d4, d5] as Roll;
-    return 2 * this.findGreaterDiceWithDicesEqual(roll, 2);
+  static score_pair(...roll: number[]): number {
+    return 2 * this.findGreaterDiceWithDicesEqual(roll as Roll, 2);
   }
 
-  static two_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
+  static two_pair(...roll: number[]): number {
     let numberOfRolls = [6, 5, 4, 3, 2, 1]
-      .map(number => [d1, d2, d3, d4, d5].filter(dice => number === dice).length);
+      .map(number => roll.filter(dice => number === dice).length);
     let firstDice = numberOfRolls.findIndex(x => x >= 2);
     let secondDice = numberOfRolls.findIndex((x, index) => x >= 2 && index > firstDice);
     let hasTwoPair = firstDice !== -1 && secondDice !== -1;
     return hasTwoPair ? (6 - firstDice) * 2 + (6 - secondDice) * 2 : 0;
   }
 
-  static three_of_a_kind(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    let roll = [d1, d2, d3, d4, d5] as Roll;
-    return 3 * this.findGreaterDiceWithDicesEqual(roll, 3);
+  static three_of_a_kind(...roll: number[]): number {
+    return 3 * this.findGreaterDiceWithDicesEqual(roll as Roll, 3);
   }
 
   static four_of_a_kind(d1: number, d2: number, d3: number, d4: number, d5: number): number {
