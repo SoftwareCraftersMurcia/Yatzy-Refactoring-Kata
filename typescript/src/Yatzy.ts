@@ -4,9 +4,9 @@ export default class Yatzy {
     return d1 + d2 + d3 + d4 + d5;
   }
 
-  static yatzy(...args: number[]): number {
-    let sum = args.reduce((acum, number) => acum + number, 0);
-    return sum === args[0] * 5 ? 50 : 0;
+  static yatzy(...roll: number[]): number {
+    let sum = roll.reduce((acum, number) => acum + number, 0);
+    return sum === roll[0] * 5 ? 50 : 0;
   }
 
   static ones(...roll: number[]): number {
