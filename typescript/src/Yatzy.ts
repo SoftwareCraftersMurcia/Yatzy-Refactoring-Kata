@@ -121,10 +121,10 @@ export default class Yatzy {
         .reduce((acum, number) => acum + number, 0);
   }
 
-  private static findGreaterDiceWithDicesEqual(roll: Roll, numberOfSameDice: number) {
+  private static findGreaterDiceWithDicesEqual(roll: Roll, numberOfSameDice: number, diceExcluded: number|undefined = undefined) {
     let number = [6, 5, 4, 3, 2, 1]
-      .map(number => roll.filter(dice => number === dice).length)
-      .findIndex(x => x >= numberOfSameDice);
+      .map(number => roll.filter((dice) => number === dice).length)
+      .findIndex((x, index) => x >= numberOfSameDice && index > 6 - (diceExcluded || 999));
     let hasPair = number !== -1;
     return hasPair ? (6 - number) : 0;
   }
