@@ -24,6 +24,15 @@ class Dices {
   equals(other: Dices) {
     return JSON.stringify(this.dices.sort()) === JSON.stringify(other.dices);
   }
+
+  findGreaterDiceWithNumberOfSameDices(numberOfSameDice: number, diceExcluded: number | undefined) {
+    let number = [6, 5, 4, 3, 2, 1]
+      .map(number => this.dices.filter((dice) => number === dice).length)
+      .findIndex((x, index) => x >= numberOfSameDice && index != 6 - (diceExcluded || 999));
+    let hasFoundDice = number !== -1;
+    return hasFoundDice ? (6 - number) : 0;
+
+  }
 }
 
 export default class Yatzy {
@@ -95,10 +104,6 @@ export default class Yatzy {
   }
 
   private static findGreaterDiceWithDicesEqual(roll: Roll, numberOfSameDice: number, diceExcluded: number|undefined = undefined) {
-    let number = [6, 5, 4, 3, 2, 1]
-      .map(number => roll.filter((dice) => number === dice).length)
-      .findIndex((x, index) => x >= numberOfSameDice && index != 6 - (diceExcluded || 999));
-    let hasFoundDice = number !== -1;
-    return hasFoundDice ? (6 - number) : 0;
+    return Dices.from(roll).findGreaterDiceWithNumberOfSameDices(numberOfSameDice, diceExcluded);
   }
 }
