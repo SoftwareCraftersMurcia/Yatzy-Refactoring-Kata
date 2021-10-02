@@ -56,16 +56,8 @@ export default class Yatzy {
     return 3 * this.findGreaterDiceWithDicesEqual(roll as Roll, 3);
   }
 
-  static four_of_a_kind(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    var tallies;
-    tallies = [0, 0, 0, 0, 0, 0, 0, 0];
-    tallies[d1 - 1]++;
-    tallies[d2 - 1]++;
-    tallies[d3 - 1]++;
-    tallies[d4 - 1]++;
-    tallies[d5 - 1]++;
-    for (let i = 0; i < 6; i++) if (tallies[i] >= 4) return (i + 1) * 4;
-    return 0;
+  static four_of_a_kind(...roll: number[]): number {
+    return 4 * this.findGreaterDiceWithDicesEqual(roll as Roll, 4);
   }
 
   static smallStraight(d1: number, d2: number, d3: number, d4: number, d5: number): number {
