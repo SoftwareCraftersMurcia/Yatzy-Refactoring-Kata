@@ -52,8 +52,8 @@ export default class Yatzy {
       .map(number => [d1, d2, d3, d4, d5].filter(roll => number === roll).length);
     let firstDice = numberOfRolls.findIndex(x => x >= 2);
     let secondDice = numberOfRolls.findIndex((x, index) => x >= 2 && index > firstDice);
-
-    return (6 - firstDice) * 2 + (6 - secondDice) * 2;
+    let hasTwoPair = firstDice !== -1 && secondDice !== -1;
+    return hasTwoPair ? (6 - firstDice) * 2 + (6 - secondDice) * 2 : 0;
   }
 
   static four_of_a_kind(_1: number, _2: number, d3: number, d4: number, d5: number): number {

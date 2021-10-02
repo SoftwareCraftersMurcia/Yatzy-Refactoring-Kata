@@ -77,6 +77,7 @@ describe('Two pair', () => {
   it('scores the sum of the two pairs', () => {
     assert.strictEqual(16, Yatzy.two_pair(3, 3, 5, 4, 5));
     assert.strictEqual(16, Yatzy.two_pair(3, 3, 5, 5, 5));
+    assert.strictEqual(0, Yatzy.two_pair(3, 3, 5, 1, 4));
   });
 });
 
