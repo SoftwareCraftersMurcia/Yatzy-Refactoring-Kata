@@ -17,7 +17,7 @@ class Dices {
     return new Dices(dices);
   }
 
-  static from(roll: Roll) {
+  static from(roll: Roll | number[]) {
     return new Dices(...roll);
   }
 
@@ -80,11 +80,11 @@ export default class Yatzy {
   }
 
   static smallStraight(roll: Roll): number {
-    return this.sameRolls(roll, [1, 2, 3, 4, 5] as Roll) ? 15 : 0;
+    return Dices.from(roll).equals(Dices.from([1, 2, 3, 4, 5])) ? 15 : 0;
   }
 
   static largeStraight(roll: Roll): number {
-    return this.sameRolls(roll, [2, 3, 4, 5, 6] as Roll) ? 20 : 0;
+    return Dices.from(roll).equals(Dices.from([2, 3, 4, 5, 6])) ? 20 : 0;
   }
 
   static fullHouse(roll: Roll): number {
@@ -100,9 +100,5 @@ export default class Yatzy {
       .findIndex((x, index) => x >= numberOfSameDice && index != 6 - (diceExcluded || 999));
     let hasPair = number !== -1;
     return hasPair ? (6 - number) : 0;
-  }
-
-  private static sameRolls(roll: Roll, other: Roll) {
-    return Dices.from(roll).equals(Dices.from(other));
   }
 }
