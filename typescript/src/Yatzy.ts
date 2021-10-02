@@ -16,6 +16,10 @@ class Dices {
       .reduce((acum, number) => acum + number, 0);
     return new Dices(dices);
   }
+
+  static from(roll: Roll) {
+    return new Dices(...roll);
+  }
 }
 
 export default class Yatzy {
@@ -87,7 +91,7 @@ export default class Yatzy {
   }
 
   private static sumDices(roll: Roll, diceNumber: number) {
-    return new Dices(...roll).with(diceNumber).sum();
+    return Dices.from(roll).with(diceNumber).sum();
   }
 
   private static findGreaterDiceWithDicesEqual(roll: Roll, numberOfSameDice: number, diceExcluded: number|undefined = undefined) {
