@@ -46,10 +46,10 @@ export default class Yatzy {
   static two_pair(...roll: number[]): number {
     let numberOfRolls = [6, 5, 4, 3, 2, 1]
       .map(number => roll.filter(dice => number === dice).length);
-    let firstDice = numberOfRolls.findIndex(x => x >= 2);
-    let secondDice = numberOfRolls.findIndex((x, index) => x >= 2 && index > firstDice);
-    let hasTwoPair = firstDice !== -1 && secondDice !== -1;
-    return hasTwoPair ? (6 - firstDice) * 2 + (6 - secondDice) * 2 : 0;
+    let firstDice = 6 - numberOfRolls.findIndex((x, index) => x >= 2 && index > (6 - 6 - 1));
+    let secondDice = 6- numberOfRolls.findIndex((x, index) => x >= 2 && index > (6 - firstDice));
+    let hasTwoPair = firstDice !==7 && secondDice !== 7;
+    return hasTwoPair ? firstDice * 2 + secondDice * 2 : 0;
   }
 
   static three_of_a_kind(...roll: number[]): number {
