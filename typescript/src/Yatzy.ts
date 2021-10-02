@@ -1,7 +1,19 @@
 type Roll = [number, number, number, number, number];
+class TheRoll {
+  private roll: Roll;
+
+  constructor(...roll: number[]) {
+    this.roll = roll as Roll;
+  }
+
+  sum() {
+    return this.roll.reduce((acum, number) => acum + number, 0);
+  }
+}
+
 export default class Yatzy {
   static chance(roll: Roll): number {
-    return roll.reduce((acum, number) => acum + number, 0);
+    return new TheRoll(...roll).sum();
   }
 
   static yatzy(roll: Roll): number {
