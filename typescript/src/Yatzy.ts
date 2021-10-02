@@ -9,6 +9,14 @@ class TheRoll {
   sum() {
     return this.roll.reduce((acum, number) => acum + number, 0);
   }
+
+  dices(diceNumber: number) {
+    let roll = this.roll
+      .filter(dice => dice === diceNumber)
+      .reduce((acum, number) => acum + number, 0);
+    return new TheRoll(roll);
+
+  }
 }
 
 export default class Yatzy {
@@ -80,9 +88,7 @@ export default class Yatzy {
   }
 
   private static sumDices(roll: Roll, diceNumber: number) {
-    return roll
-        .filter(dice => dice === diceNumber)
-        .reduce((acum, number) => acum + number, 0);
+    return new TheRoll(...roll).dices(diceNumber).sum();
   }
 
   private static findGreaterDiceWithDicesEqual(roll: Roll, numberOfSameDice: number, diceExcluded: number|undefined = undefined) {
