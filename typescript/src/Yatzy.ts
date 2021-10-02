@@ -33,27 +33,27 @@ export default class Yatzy {
   }
 
   static ones(roll: Roll): number {
-    return this.sumDices(roll, 1);
+    return Dices.from(roll).with(1).sum();
   }
 
   static twos(roll: Roll): number {
-    return this.sumDices(roll, 2);
+    return Dices.from(roll).with(2).sum();
   }
 
   static threes(roll: Roll): number {
-    return this.sumDices(roll, 3);
+    return Dices.from(roll).with(3).sum();
   }
 
   static fours(roll: Roll): number {
-    return Yatzy.sumDices(roll, 4);
+    return Dices.from(roll).with(4).sum();
   }
 
   static fives(roll: Roll): number {
-    return Yatzy.sumDices(roll, 5);
+    return Dices.from(roll).with(5).sum();
   }
 
   static sixes(roll: Roll): number {
-    return Yatzy.sumDices(roll, 6);
+    return Dices.from(roll).with(6).sum();
   }
 
   static score_pair(roll: Roll): number {
@@ -88,10 +88,6 @@ export default class Yatzy {
     let twoOfAKind = this.findGreaterDiceWithDicesEqual(roll, 2, threeOfAKind);
     let isFullHouse = threeOfAKind !== 0 && twoOfAKind !==0;
     return isFullHouse ? threeOfAKind * 3 + twoOfAKind *2 : 0;
-  }
-
-  private static sumDices(roll: Roll, diceNumber: number) {
-    return Dices.from(roll).with(diceNumber).sum();
   }
 
   private static findGreaterDiceWithDicesEqual(roll: Roll, numberOfSameDice: number, diceExcluded: number|undefined = undefined) {
