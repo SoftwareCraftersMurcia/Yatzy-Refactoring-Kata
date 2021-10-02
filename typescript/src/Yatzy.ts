@@ -54,15 +54,7 @@ export default class Yatzy {
   }
 
   static three_of_a_kind(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    var t;
-    t = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    t[d1 - 1]++;
-    t[d2 - 1]++;
-    t[d3 - 1]++;
-    t[d4 - 1]++;
-    t[d5 - 1]++;
-    for (let i = 0; i < 6; i++) if (t[i] >= 3) return (i + 1) * 3;
-    return 0;
+    return 3 * this.findGreaterDiceWithDicesEqual([d1, d2, d3, d4, d5], 3);
   }
 
   static four_of_a_kind(_1: number, _2: number, d3: number, d4: number, d5: number): number {
