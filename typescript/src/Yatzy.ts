@@ -40,16 +40,10 @@ export default class Yatzy {
   }
 
   static score_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    const occurrenceComputation = [6, 5, 4, 3, 2, 1]
-        .map((x) => ({
-          diceNumber: x,
-          occurrences: [d1, d2, d3, d4, d5].filter(n => n === x).length
-        }))
-        .filter(({occurrences}) => occurrences >= 2);
-    if (!occurrenceComputation[0]) return 0;
-
-    const {diceNumber, occurrences} = occurrenceComputation[0]
-    return diceNumber * occurrences;
+    let number = [6, 5, 4, 3, 2, 1]
+      .map(number => [d1, d2, d3, d4, d5].filter(roll => number === roll).length)
+      .findIndex(x => x >= 2);
+    return number === -1 ? 0 : (6 - number) * 2;
   }
 
   static two_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
