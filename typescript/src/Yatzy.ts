@@ -1,9 +1,9 @@
 type Roll = [number, number, number, number, number];
 export default class Yatzy {
-  private dice: Roll;
+  private roll: Roll;
 
   constructor(d1: number, d2: number, d3: number, d4: number, d5: number) {
-    this.dice = [d1, d2, d3, d4, d5];
+    this.roll = [d1, d2, d3, d4, d5];
   }
 
   static chance(d1: number, d2: number, d3: number, d4: number, d5: number): number {
@@ -28,15 +28,15 @@ export default class Yatzy {
   }
 
   fours(): number {
-    return Yatzy.sumDices(this.dice, 4);
+    return Yatzy.sumDices(this.roll, 4);
   }
 
   fives(): number {
-    return Yatzy.sumDices(this.dice, 5);
+    return Yatzy.sumDices(this.roll, 5);
   }
 
   sixes(): number {
-    return Yatzy.sumDices(this.dice, 6);
+    return Yatzy.sumDices(this.roll, 6);
   }
 
   static score_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
@@ -46,7 +46,7 @@ export default class Yatzy {
 
   static two_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
     let numberOfRolls = [6, 5, 4, 3, 2, 1]
-      .map(number => [d1, d2, d3, d4, d5].filter(roll => number === roll).length);
+      .map(number => [d1, d2, d3, d4, d5].filter(dice => number === dice).length);
     let firstDice = numberOfRolls.findIndex(x => x >= 2);
     let secondDice = numberOfRolls.findIndex((x, index) => x >= 2 && index > firstDice);
     let hasTwoPair = firstDice !== -1 && secondDice !== -1;
@@ -140,7 +140,7 @@ export default class Yatzy {
 
   private static findGreaterDiceWithDicesEqual(d1: number, d2: number, d3: number, d4: number, d5: number, numberOfSameDice: number) {
     let number = [6, 5, 4, 3, 2, 1]
-      .map(number => [d1, d2, d3, d4, d5].filter(roll => number === roll).length)
+      .map(number => [d1, d2, d3, d4, d5].filter(dice => number === dice).length)
       .findIndex(x => x >= numberOfSameDice);
     let hasPair = number !== -1;
     return hasPair ? (6 - number) : 0;
