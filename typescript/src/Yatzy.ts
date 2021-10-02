@@ -1,39 +1,3 @@
-type Roll = [number, number, number, number, number];
-class Dices {
-  private dices: number[];
-
-  constructor(...dices: number[]) {
-    this.dices = dices;
-  }
-
-  sum() {
-    return this.dices.reduce((acum, number) => acum + number, 0);
-  }
-
-  with(number: number) {
-    let dices = this.dices
-      .filter(dice => dice === number)
-      .reduce((acum, number) => acum + number, 0);
-    return new Dices(dices);
-  }
-
-  static from(roll: Roll | number[]) {
-    return new Dices(...roll);
-  }
-
-  equals(other: Dices) {
-    return JSON.stringify(this.dices.sort()) === JSON.stringify(other.dices);
-  }
-
-  findGreaterDiceWithNumberOfSameDices(numberOfSameDice: number, diceExcluded: number | undefined = undefined) {
-    let number = [6, 5, 4, 3, 2, 1]
-      .map(number => this.dices.filter((dice) => number === dice).length)
-      .findIndex((x, index) => x >= numberOfSameDice && index != 6 - (diceExcluded || 999));
-    let hasFoundDice = number !== -1;
-    return hasFoundDice ? (6 - number) : 0;
-  }
-}
-
 export default class Yatzy {
   static chance(roll: Roll): number {
     return new Dices(...roll).sum();
@@ -101,5 +65,42 @@ export default class Yatzy {
     let twoOfAKind = Dices.from(roll).findGreaterDiceWithNumberOfSameDices(2, threeOfAKind);
     let isFullHouse = threeOfAKind !== 0 && twoOfAKind !==0;
     return isFullHouse ? threeOfAKind * 3 + twoOfAKind *2 : 0;
+  }
+}
+
+type Roll = [number, number, number, number, number];
+
+class Dices {
+  private dices: number[];
+
+  constructor(...dices: number[]) {
+    this.dices = dices;
+  }
+
+  sum() {
+    return this.dices.reduce((acum, number) => acum + number, 0);
+  }
+
+  with(number: number) {
+    let dices = this.dices
+      .filter(dice => dice === number)
+      .reduce((acum, number) => acum + number, 0);
+    return new Dices(dices);
+  }
+
+  static from(roll: Roll | number[]) {
+    return new Dices(...roll);
+  }
+
+  equals(other: Dices) {
+    return JSON.stringify(this.dices.sort()) === JSON.stringify(other.dices);
+  }
+
+  findGreaterDiceWithNumberOfSameDices(numberOfSameDice: number, diceExcluded: number | undefined = undefined) {
+    let number = [6, 5, 4, 3, 2, 1]
+      .map(number => this.dices.filter((dice) => number === dice).length)
+      .findIndex((x, index) => x >= numberOfSameDice && index != 6 - (diceExcluded || 999));
+    let hasFoundDice = number !== -1;
+    return hasFoundDice ? (6 - number) : 0;
   }
 }
