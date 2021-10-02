@@ -31,8 +31,8 @@ export default class Yatzy {
     return Yatzy.sumDices(this.roll, 4);
   }
 
-  fives(): number {
-    return Yatzy.sumDices(this.roll, 5);
+  static fives(...roll: number[]): number {
+    return Yatzy.sumDices(roll as Roll, 5);
   }
 
   sixes(): number {

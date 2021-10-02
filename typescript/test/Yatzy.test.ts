@@ -50,9 +50,9 @@ describe('Fours', () => {
 
 describe('Fives', () => {
   it('score the sum of fives', () => {
-    assert.strictEqual(10, new Yatzy(4, 4, 4, 5, 5).fives());
-    assert.strictEqual(15, new Yatzy(4, 4, 5, 5, 5).fives());
-    assert.strictEqual(20, new Yatzy(4, 5, 5, 5, 5).fives());
+    assert.strictEqual(10, Yatzy.fives(4, 4, 4, 5, 5));
+    assert.strictEqual(15, Yatzy.fives(4, 4, 5, 5, 5));
+    assert.strictEqual(20, Yatzy.fives(4, 5, 5, 5, 5));
   });
 });
 
