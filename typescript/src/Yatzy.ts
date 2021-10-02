@@ -17,7 +17,7 @@ export default class Yatzy {
   }
 
   static yatzy(roll: Roll): number {
-    let sum = roll.reduce((acum, number) => acum + number, 0);
+    let sum = new TheRoll(...roll).sum();
     return sum === roll[0] * 5 ? 50 : 0;
   }
 
