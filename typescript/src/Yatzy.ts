@@ -44,11 +44,9 @@ export default class Yatzy {
   }
 
   static two_pair(...roll: number[]): number {
-    let numberOfRolls = [6, 5, 4, 3, 2, 1]
-      .map(number => roll.filter(dice => number === dice).length);
-    let firstDice = 6 - numberOfRolls.findIndex((x, index) => x >= 2 && index > (6 - 6 - 1));
-    let secondDice = 6- numberOfRolls.findIndex((x, index) => x >= 2 && index > (6 - firstDice));
-    let hasTwoPair = firstDice !==7 && secondDice !== 7;
+    let firstDice = this.findGreaterDiceWithDicesEqual(roll as Roll, 2);
+    let secondDice = this.findGreaterDiceWithDicesEqual(roll as Roll, 2, firstDice);
+    let hasTwoPair = firstDice && secondDice;
     return hasTwoPair ? firstDice * 2 + secondDice * 2 : 0;
   }
 
