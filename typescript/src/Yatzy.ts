@@ -25,13 +25,12 @@ class Dices {
     return JSON.stringify(this.dices.sort()) === JSON.stringify(other.dices);
   }
 
-  findGreaterDiceWithNumberOfSameDices(numberOfSameDice: number, diceExcluded: number | undefined) {
+  findGreaterDiceWithNumberOfSameDices(numberOfSameDice: number, diceExcluded: number | undefined = undefined) {
     let number = [6, 5, 4, 3, 2, 1]
       .map(number => this.dices.filter((dice) => number === dice).length)
       .findIndex((x, index) => x >= numberOfSameDice && index != 6 - (diceExcluded || 999));
     let hasFoundDice = number !== -1;
     return hasFoundDice ? (6 - number) : 0;
-
   }
 }
 
@@ -41,7 +40,7 @@ export default class Yatzy {
   }
 
   static yatzy(roll: Roll): number {
-    let isYatzy = this.findGreaterDiceWithDicesEqual(roll, 5) !== 0;
+    let isYatzy = Dices.from(roll).findGreaterDiceWithNumberOfSameDices(5) !== 0;
     return isYatzy ? 50 : 0;
   }
 
@@ -70,22 +69,23 @@ export default class Yatzy {
   }
 
   static score_pair(roll: Roll): number {
-    return 2 * this.findGreaterDiceWithDicesEqual(roll, 2);
+    return 2 * Dices.from(roll).findGreaterDiceWithNumberOfSameDices(2);
   }
 
   static two_pair(roll: Roll): number {
-    let firstDice = this.findGreaterDiceWithDicesEqual(roll, 2);
-    let secondDice = this.findGreaterDiceWithDicesEqual(roll, 2, firstDice);
+    let dices = Dices.from(roll);
+    let firstDice = dices.findGreaterDiceWithNumberOfSameDices(2);
+    let secondDice = dices.findGreaterDiceWithNumberOfSameDices(2, firstDice);
     let isTwoPair = firstDice && secondDice;
     return isTwoPair ? firstDice * 2 + secondDice * 2 : 0;
   }
 
   static three_of_a_kind(roll: Roll): number {
-    return 3 * this.findGreaterDiceWithDicesEqual(roll, 3);
+    return 3 * Dices.from(roll).findGreaterDiceWithNumberOfSameDices(3);
   }
 
   static four_of_a_kind(roll: Roll): number {
-    return 4 * this.findGreaterDiceWithDicesEqual(roll, 4);
+    return 4 * Dices.from(roll).findGreaterDiceWithNumberOfSameDices(4);
   }
 
   static smallStraight(roll: Roll): number {
@@ -97,13 +97,9 @@ export default class Yatzy {
   }
 
   static fullHouse(roll: Roll): number {
-    let threeOfAKind = this.findGreaterDiceWithDicesEqual(roll, 3);
-    let twoOfAKind = this.findGreaterDiceWithDicesEqual(roll, 2, threeOfAKind);
+    let threeOfAKind = Dices.from(roll).findGreaterDiceWithNumberOfSameDices(3);
+    let twoOfAKind = Dices.from(roll).findGreaterDiceWithNumberOfSameDices(2, threeOfAKind);
     let isFullHouse = threeOfAKind !== 0 && twoOfAKind !==0;
     return isFullHouse ? threeOfAKind * 3 + twoOfAKind *2 : 0;
-  }
-
-  private static findGreaterDiceWithDicesEqual(roll: Roll, numberOfSameDice: number, diceExcluded: number|undefined = undefined) {
-    return Dices.from(roll).findGreaterDiceWithNumberOfSameDices(numberOfSameDice, diceExcluded);
   }
 }
