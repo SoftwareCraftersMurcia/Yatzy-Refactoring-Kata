@@ -32,8 +32,8 @@ export default class Yatzy {
   }
 
   static yatzy(roll: Roll): number {
-    let sum = new Dices(...roll).sum();
-    return sum === roll[0] * 5 ? 50 : 0;
+    let isYatzy = this.findGreaterDiceWithDicesEqual(roll, 5) !== 0;
+    return isYatzy ? 50 : 0;
   }
 
   static ones(roll: Roll): number {
