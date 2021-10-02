@@ -98,7 +98,7 @@ export default class Yatzy {
     let number = [6, 5, 4, 3, 2, 1]
       .map(number => roll.filter((dice) => number === dice).length)
       .findIndex((x, index) => x >= numberOfSameDice && index != 6 - (diceExcluded || 999));
-    let hasPair = number !== -1;
-    return hasPair ? (6 - number) : 0;
+    let hasFoundDice = number !== -1;
+    return hasFoundDice ? (6 - number) : 0;
   }
 }
