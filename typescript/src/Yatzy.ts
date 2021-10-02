@@ -20,6 +20,10 @@ class Dices {
   static from(roll: Roll) {
     return new Dices(...roll);
   }
+
+  equals(other: Dices) {
+    return JSON.stringify(this.dices.sort()) === JSON.stringify(other.dices);
+  }
 }
 
 export default class Yatzy {
@@ -99,6 +103,6 @@ export default class Yatzy {
   }
 
   private static sameRolls(roll: Roll, other: Roll) {
-    return JSON.stringify(roll.sort()) === JSON.stringify(other);
+    return Dices.from(roll).equals(Dices.from(other));
   }
 }
