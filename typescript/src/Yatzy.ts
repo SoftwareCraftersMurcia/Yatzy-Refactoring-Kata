@@ -40,8 +40,8 @@ export default class Yatzy {
   }
 
   static score_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    let dice = this.findGreaterDiceWithDicesEqual([d1, d2, d3, d4, d5], 2);
-    return dice * 2;
+    let roll = [d1, d2, d3, d4, d5] as Roll;
+    return 2 * this.findGreaterDiceWithDicesEqual(roll, 2);
   }
 
   static two_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
@@ -54,7 +54,8 @@ export default class Yatzy {
   }
 
   static three_of_a_kind(d1: number, d2: number, d3: number, d4: number, d5: number): number {
-    return 3 * this.findGreaterDiceWithDicesEqual([d1, d2, d3, d4, d5], 3);
+    let roll = [d1, d2, d3, d4, d5] as Roll;
+    return 3 * this.findGreaterDiceWithDicesEqual(roll, 3);
   }
 
   static four_of_a_kind(_1: number, _2: number, d3: number, d4: number, d5: number): number {
