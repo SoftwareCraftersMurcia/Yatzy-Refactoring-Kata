@@ -46,8 +46,8 @@ export default class Yatzy {
   static two_pair(...roll: number[]): number {
     let firstDice = this.findGreaterDiceWithDicesEqual(roll as Roll, 2);
     let secondDice = this.findGreaterDiceWithDicesEqual(roll as Roll, 2, firstDice);
-    let hasTwoPair = firstDice && secondDice;
-    return hasTwoPair ? firstDice * 2 + secondDice * 2 : 0;
+    let isTwoPair = firstDice && secondDice;
+    return isTwoPair ? firstDice * 2 + secondDice * 2 : 0;
   }
 
   static three_of_a_kind(...roll: number[]): number {
@@ -69,7 +69,8 @@ export default class Yatzy {
   static fullHouse(...roll: number[]): number {
     let threeOfAKind = this.findGreaterDiceWithDicesEqual(roll as Roll, 3);
     let twoOfAKind = this.findGreaterDiceWithDicesEqual(roll as Roll, 2, threeOfAKind);
-    return threeOfAKind !== 0 && twoOfAKind !==0 ? threeOfAKind * 3 + twoOfAKind *2 : 0;
+    let isFullHouse = threeOfAKind !== 0 && twoOfAKind !==0;
+    return isFullHouse ? threeOfAKind * 3 + twoOfAKind *2 : 0;
   }
 
   private static sumDices(roll: Roll, diceNumber: number) {
