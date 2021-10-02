@@ -43,7 +43,8 @@ export default class Yatzy {
     let number = [6, 5, 4, 3, 2, 1]
       .map(number => [d1, d2, d3, d4, d5].filter(roll => number === roll).length)
       .findIndex(x => x >= 2);
-    return number === -1 ? 0 : (6 - number) * 2;
+    let hasPair = number !== -1;
+    return hasPair ? (6 - number) * 2 : 0;
   }
 
   static two_pair(d1: number, d2: number, d3: number, d4: number, d5: number): number {
