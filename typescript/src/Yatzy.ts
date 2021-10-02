@@ -1,11 +1,5 @@
 type Roll = [number, number, number, number, number];
 export default class Yatzy {
-  private roll: Roll;
-
-  constructor(d1: number, d2: number, d3: number, d4: number, d5: number) {
-    this.roll = [d1, d2, d3, d4, d5];
-  }
-
   static chance(d1: number, d2: number, d3: number, d4: number, d5: number): number {
     return d1 + d2 + d3 + d4 + d5;
   }
@@ -27,8 +21,8 @@ export default class Yatzy {
     return this.sumDices(roll as Roll, 3);
   }
 
-  fours(): number {
-    return Yatzy.sumDices(this.roll, 4);
+  static fours(...roll: number[]): number {
+    return Yatzy.sumDices(roll as Roll, 4);
   }
 
   static fives(...roll: number[]): number {

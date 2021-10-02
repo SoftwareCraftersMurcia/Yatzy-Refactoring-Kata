@@ -42,9 +42,9 @@ describe('Threes', () => {
 
 describe('Fours', () => {
   it('score the sum of 4s', () => {
-    assert.strictEqual(12, new Yatzy(4, 4, 4, 5, 5).fours());
-    assert.strictEqual(8, new Yatzy(4, 4, 5, 5, 5).fours());
-    assert.strictEqual(4, new Yatzy(4, 5, 5, 5, 5).fours());
+    assert.strictEqual(12, Yatzy.fours(4, 4, 4, 5, 5));
+    assert.strictEqual(8, Yatzy.fours(4, 4, 5, 5, 5));
+    assert.strictEqual(4, Yatzy.fours(4, 5, 5, 5, 5));
   });
 });
 
