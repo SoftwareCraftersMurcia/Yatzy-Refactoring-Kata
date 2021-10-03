@@ -83,9 +83,8 @@ class Dices {
 
   with(number: number) {
     let dices = this.dices
-      .filter(dice => dice === number)
-      .reduce((acum, number) => acum + number, 0);
-    return new Dices(dices);
+      .filter(dice => dice === number);
+    return Dices.from(dices);
   }
 
   static from(roll: Roll | number[]) {
