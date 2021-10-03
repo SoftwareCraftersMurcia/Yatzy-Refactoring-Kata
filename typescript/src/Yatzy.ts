@@ -63,8 +63,8 @@ export default class Yatzy {
   static fullHouse(roll: Roll): number {
     let threeOfAKind = Dices.from(roll).findGreaterDiceWithNumberOfSameDices(3);
     let twoOfAKind = Dices.from(roll).findGreaterDiceWithNumberOfSameDices(2, threeOfAKind);
-    let isFullHouse = threeOfAKind !== 0 && twoOfAKind !==0;
-    return isFullHouse ? threeOfAKind * 3 + twoOfAKind *2 : 0;
+    let isFullHouse = threeOfAKind !== 0 && twoOfAKind !== 0;
+    return isFullHouse ? threeOfAKind * 3 + twoOfAKind * 2 : 0;
   }
 }
 
@@ -77,6 +77,10 @@ class Dices {
     this.dices = dices;
   }
 
+  static from(roll: Roll | number[]): Dices {
+    return new Dices(...roll);
+  }
+
   sum(): number {
     return this.dices.reduce((acum, number) => acum + number, 0);
   }
@@ -85,10 +89,6 @@ class Dices {
     let dices = this.dices
       .filter(dice => dice === number);
     return Dices.from(dices);
-  }
-
-  static from(roll: Roll | number[]): Dices {
-    return new Dices(...roll);
   }
 
   equals(other: Dices): boolean {
