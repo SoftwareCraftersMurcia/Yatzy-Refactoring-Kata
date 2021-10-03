@@ -52,11 +52,11 @@ export default class Yatzy {
   }
 
   static smallStraight(dices: Dices): number {
-    return dices.equals(Dices.from([1, 2, 3, 4, 5])) ? 15 : 0;
+    return dices.equals(new Dices(1, 2, 3, 4, 5)) ? 15 : 0;
   }
 
   static largeStraight(dices: Dices): number {
-    return dices.equals(Dices.from([2, 3, 4, 5, 6])) ? 20 : 0;
+    return dices.equals(new Dices(2, 3, 4, 5, 6)) ? 20 : 0;
   }
 
   static fullHouse(dices: Dices): number {
@@ -67,17 +67,11 @@ export default class Yatzy {
   }
 }
 
-type Roll = [number, number, number, number, number];
-
 export class Dices {
   private dices: number[];
 
   constructor(...dices: number[]) {
     this.dices = dices;
-  }
-
-  static from(roll: Roll | number[]): Dices {
-    return new Dices(...roll);
   }
 
   sum(): number {
@@ -87,7 +81,7 @@ export class Dices {
   with(number: number): Dices {
     let dices = this.dices
       .filter(dice => dice === number);
-    return Dices.from(dices);
+    return new Dices(...dices);
   }
 
   equals(other: Dices): boolean {
