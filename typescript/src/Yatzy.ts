@@ -77,25 +77,25 @@ class Dices {
     this.dices = dices;
   }
 
-  sum() {
+  sum(): number {
     return this.dices.reduce((acum, number) => acum + number, 0);
   }
 
-  with(number: number) {
+  with(number: number): Dices {
     let dices = this.dices
       .filter(dice => dice === number);
     return Dices.from(dices);
   }
 
-  static from(roll: Roll | number[]) {
+  static from(roll: Roll | number[]): Dices {
     return new Dices(...roll);
   }
 
-  equals(other: Dices) {
+  equals(other: Dices): boolean {
     return JSON.stringify(this.dices.sort()) === JSON.stringify(other.dices);
   }
 
-  findGreaterDiceWithNumberOfSameDices(numberOfSameDice: number, diceExcluded: number | undefined = undefined) {
+  findGreaterDiceWithNumberOfSameDices(numberOfSameDice: number, diceExcluded: number | undefined = undefined): number {
     let number = [6, 5, 4, 3, 2, 1]
       .map(number => this.dices.filter((dice) => number === dice).length)
       .findIndex((x, index) => x >= numberOfSameDice && index != 6 - (diceExcluded || 999));
