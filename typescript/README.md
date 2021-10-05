@@ -20,5 +20,3 @@ npm test
 ```bash
 npm run watch
 ```
-
-
